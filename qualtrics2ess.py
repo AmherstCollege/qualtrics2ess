@@ -37,7 +37,7 @@ else:
     infile = sys.argv[1]
     filename = os.path.basename(infile)
 
-voters = () # Information about all voters
+#voters = () # Information about all voters, if one wishes to include in output.
 elections = ()  # row indices of election information
 candidates = () # list of available candidates for each election
 rankings = ()   # Rankings by all voters
@@ -46,7 +46,7 @@ with open(infile, 'r') as input:
         if len(elections) == 0:   # First row, election labels
             if len(row) <= 10 or len(row[10]) < 2 or row[10][:2] != 'Q1':
                 sys.exit('Error: Qualtrics file does not have election information.')
-            voters = (row[:10],)
+            #voters = (row[:10],)
             election = 10
             elections = (election,) # index into row for election start
             qCurrent = 'Q1'
@@ -58,7 +58,7 @@ with open(infile, 'r') as input:
                 elections += (election,)
             elections += (election+1,)    # non-existent election but an end marker
         elif len(candidates) == 0: # Second row, election candidates
-            voters = (row[:10],)
+            #voters = (row[:10],)
             for i in range(len(elections)-1):
                 questions = ()
                 for question in row[elections[i]:elections[i + 1]]:
@@ -66,7 +66,7 @@ with open(infile, 'r') as input:
                 candidates += (questions,)
         elif row[0][0] == '{': continue # Third row {"Importid": …}, skip
         else:
-            voters += (row[:10],)
+            #voters += (row[:10],)
             rankingsByChoice = ()
             for i in range(len(elections)-1):
                 rankingByCandidate = row[elections[i]:elections[i + 1]]
