@@ -43,7 +43,6 @@ candidates = () # list of available candidates for each election
 rankings = ()   # Rankings by all voters
 with open(infile, 'r') as input:
     for row in csv.reader(input):
-        #print(row)
         if len(elections) == 0:   # First row, election labels
             if len(row) <= 10 or len(row[10]) < 2 or row[10][:2] != 'Q1':
                 sys.exit('Error: Qualtrics file does not have election information.')
@@ -58,7 +57,6 @@ with open(infile, 'r') as input:
                 qCurrent = q
                 elections += (election,)
             elections += (election+1,)    # non-existent election but an end marker
-            #print(row, '\n', elections)
         elif len(candidates) == 0: # Second row, election candidates
             voters = (row[:10],)
             for i in range(len(elections)-1):
@@ -66,15 +64,12 @@ with open(infile, 'r') as input:
                 for question in row[elections[i]:elections[i + 1]]:
                     questions += (question.split(' - ')[-1],)
                 candidates += (questions,)
-                #print(values)
         elif row[0][0] == '{': continue # Third row {"Importid": …}, skip
         else:
             voters += (row[:10],)
             rankingsByChoice = ()
             for i in range(len(elections)-1):
-                #print(candidates[i])
                 rankingByCandidate = row[elections[i]:elections[i + 1]]
-                #print(rankingByCandidate)
                 rankingByChoice = ()
                 for rank in range(1,len(rankingByCandidate)):  # avoids last write-in value
                     try:
