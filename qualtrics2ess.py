@@ -3,18 +3,23 @@
 """
 qualtrics2ess.py
 
-Convert ranked choice output from Qualtrics to ES&S CSV format, 
-which can be fed into the Universal RCV Tabulator.
+Convert ranked choice output from Qualtrics CSV to ES&S format, 
+which can be fed into the RCV Universal Tabulator.
 
-The former is in Candidate by Choice format, while the latter is Choice by Candidate.
+Usage: ./qualtrics2ess.py qualtricsfile.csv
 
-Separate elections are output into different files.
+• The former is in Candidate by Choice format, while the latter is Choice by Candidate.
 
-Extra header and voter identification information is dropped.
+• Write-in values are filled in in the correct choice column.
 
-Compatible with both Python 2 and 3.
+• Blank or -99 values are replaced by the keyword "undervote". 
+Qualtrics will by itself prevent overvotes.
 
-Usage: ./qualtrics2ess.py qualtricsfile
+• Separate elections are output into different CSV files.
+
+• Extra header and voter identification information is dropped.
+
+• Compatible with both Python 2 and 3.
 
 Created on Mon Apr  5 01:40:21 2021
 
