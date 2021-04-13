@@ -96,6 +96,6 @@ for election in range(1, len(elections)):
         csvwriter.writerow(["Cast Vote Record","Precinct","Ballot Style"] +
            ['Q' + str(election) + ' Choice ' + str(choice) for choice in range(1,elections[election] - elections[election-1])])
         for record in range(len(rankings)):
-            csvwriter.writerow((str(record+1), unquote_plus(filename.split('%3F')[0]), "Qualtrics") + 
+            csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
                                rankings[record][election-1])            
         output.close()
