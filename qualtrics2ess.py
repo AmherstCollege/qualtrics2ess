@@ -38,9 +38,9 @@ else:
 
 if len(sys.argv) != 2 :
     sys.exit('Usage: ' + sys.argv[0] + ' qualtricsfile')
-else:
-    infile = sys.argv[1]
-    filename = os.path.basename(infile)
+
+infile = sys.argv[1]
+filename = os.path.splitext(os.path.basename(infile))[0]    # Root filename
 
 #voters = () # Information about all voters, if one wishes to include in output.
 elections = ()  # row indices of election information
@@ -96,7 +96,7 @@ with open(infile, 'r') as input:
 input.close()
 
 for election in range(1, len(elections)):
-    with open(filename[:-4] + '_Q' + str(election) + '.csv', 'w') as output:
+    with open(filename + '_Q' + str(election) + '.csv', 'w') as output:
         csvwriter = csv.writer(output)
         csvwriter.writerow(["Cast Vote Record","Precinct","Ballot Style"] +
            ['Q' + str(election) + ' Choice ' + str(choice) for choice in range(1,elections[election] - elections[election-1])])
