@@ -64,7 +64,7 @@ config = {
     "generateCdfJson" : False
   },
   "cvrFileSources" : [ {
-    "filePath" : outputDirectory + os.path.pathsep + filename + '.xlsx',
+    "filePath" : "",
     "contestId" : "",
     "firstVoteColumnIndex" : "4",
     "firstVoteRowIndex" : "2",
@@ -82,7 +82,7 @@ config = {
     "tiebreakMode" : "previousRoundCountsThenRandom",
     "overvoteRule" : "exhaustImmediately",
     "winnerElectionMode" : "singleWinnerMajority",
-    "randomSeed" : round(random.SystemRandom().random()*10000),
+    "randomSeed" : str(round(random.SystemRandom().random()*10000)),
     "numberOfWinners" : "1",
     "multiSeatBottomsUpPercentageThreshold" : "",
     "decimalPlacesForVoteArithmetic" : "4",
@@ -161,10 +161,10 @@ input.close()
 for election in range(len(elections)-1):
     eLabel = eLabels[election]
     config['outputSettings']['contestOffice'] = eLabel
-    config['cvrFileSources'][0]['contestId'] = eLabel
     config['candidates'] = []
     for candidate in allCandidates[election]:
         config['candidates'] += [{ "name" : candidate, "code" : "", "excluded" : False }]
+    config['cvrFileSources'][0]['filePath'] = filename + '_' + eLabel + '.xlsx'
     with open(filename + '_' + eLabel + '.csv', 'w') as output:
         csvwriter = csv.writer(output)
         csvwriter.writerow(["Cast Vote Record","Precinct","Ballot Style"] +
