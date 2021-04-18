@@ -175,7 +175,6 @@ for election in range(len(elections)-1):
     config['cvrFileSources'][0]['filePath'] = filenameElection + '.xlsx'
     with open(filenameElection + '_cdf.json', 'w') as output:
         output.write(jsonPrint(config, indent=4, separators=(',', ': ')))
-        output.close()
         print("Saved: " + filenameElection + '_cdf.json')
 
     header = ["Cast Vote Record","Precinct","Ballot Style"] + \
@@ -199,7 +198,6 @@ for election in range(len(elections)-1):
             for record in range(len(rankings)):
                 csvwriter.writerow((str(record+1), filename, "Qualtrics") + 
                                    rankings[record][election])            
-            output.close()
             print("Saved: " + filenameElection + '.csv')
 
 if not excel:
