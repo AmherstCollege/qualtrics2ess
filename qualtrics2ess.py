@@ -199,6 +199,8 @@ for election in range(len(elections)-1):
                 csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
                                    rankings[record][election])            
             output.close()
-        print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
 
-print("Notice: Election rules are not determined! Open the cdf.json files in the RCV Tabulator, and see Rules Description and Winning Rules.")
+if not excel:
+    print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
+
+print("Notice: Election rules are not determined! Open the cdf.json files in the RCV Tabulator, and set the Rules Description and Winning Rules.")
