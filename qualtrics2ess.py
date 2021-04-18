@@ -67,7 +67,7 @@ config = {
     "contestName" : contestName,
     "outputDirectory" : outputDirectory,
     "contestDate" : date.isoformat()[:10],
-    "contestJurisdiction" : "Association of Amherst Students",
+    "contestJurisdiction" : "",
     "contestOffice" : "",
     "tabulateByPrecinct" : False,
     "generateCdfJson" : False
