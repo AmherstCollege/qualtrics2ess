@@ -48,9 +48,7 @@ else:
     excel = True
 
 
-if len(sys.argv) == 1:
-    infile = 'What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv'
-elif len(sys.argv) != 2 :
+if len(sys.argv) != 2 :
     sys.exit('Usage: ' + sys.argv[0] + ' qualtricsfile')
 else:
     infile = sys.argv[1]
