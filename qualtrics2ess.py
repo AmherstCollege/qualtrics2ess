@@ -176,6 +176,7 @@ for election in range(len(elections)-1):
     with open(filenameElection + '_cdf.json', 'w') as output:
         output.write(jsonPrint(config, indent=4, separators=(',', ': ')))
         output.close()
+        print("Saved: " + filenameElection + '_cdf.json')
 
     header = ["Cast Vote Record","Precinct","Ballot Style"] + \
                [eLabel + ' Choice ' + str(choice) 
@@ -190,16 +191,18 @@ for election in range(len(elections)-1):
                        rankings[record][election])            
         wb.save(filename = config['cvrFileSources'][0]['filePath'])
         wb.close()
+        print("Saved: " + config['cvrFileSources'][0]['filePath'])
     else:   # CSV
-        with open(filename + '_' + eLabel + '.csv', 'w') as output:
+        with open(filenameElection + '.csv', 'w') as output:
             csvwriter = csv.writer(output)
             csvwriter.writerow(header)
             for record in range(len(rankings)):
-                csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
+                csvwriter.writerow((str(record+1), filename, "Qualtrics") + 
                                    rankings[record][election])            
             output.close()
+            print("Saved: " + filenameElection + '.csv')
 
 if not excel:
-    print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
+    print("Warning: Output CSV files must be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
 
 print("Notice: Election rules are not determined! Open the cdf.json files in the RCV Tabulator, and set the Rules Description and Winning Rules.")
