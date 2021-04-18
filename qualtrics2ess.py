@@ -171,8 +171,9 @@ for election in range(len(elections)-1):
     config['candidates'] = []
     for candidate in allCandidates[election]:
         config['candidates'] += [{ "name" : candidate, "code" : "", "excluded" : False }]
-    config['cvrFileSources'][0]['filePath'] = filename + '_' + eLabel + '.xlsx'
-    with open(filename + '_' + eLabel + '_cdf.json', 'w') as output:
+    filenameElection = filename + '_' + eLabel
+    config['cvrFileSources'][0]['filePath'] = filenameElection + '.xlsx'
+    with open(filenameElection + '_cdf.json', 'w') as output:
         output.write(jsonPrint(config, indent=4, separators=(',', ': ')))
         output.close()
 
