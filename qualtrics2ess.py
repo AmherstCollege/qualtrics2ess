@@ -28,79 +28,151 @@ Created on Mon Apr  5 01:40:21 2021
 import sys
 import os
 import csv
+import json
+import random
+from datetime import datetime
 
-if sys.version_info.major + sys.version_info.minor/10. <= 2.3:
-    sys.exit('Version of python must be >= 2.3')
+if sys.version_info.major + sys.version_info.minor/10. < 2.5:
+    sys.exit('Version of python must be >= 2.5')
 elif sys.version_info.major == 2:
     from urllib import unquote_plus
 else:
     from urllib.parse import unquote_plus
 
-if len(sys.argv) != 2 :
+if len(sys.argv) == 1:
+    infile = 'What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv'
+elif len(sys.argv) != 2 :
     sys.exit('Usage: ' + sys.argv[0] + ' qualtricsfile')
-
-infile = sys.argv[1]
+else:
+    infile = sys.argv[1]
+outputDirectory = os.path.dirname(infile)
+if outputDirectory == '':
+    outputDirectory = os.getcwd()
 filename = os.path.splitext(os.path.basename(infile))[0]    # Root filename
+(contestName, electionDate, time) = unquote_plus(filename).split('_')
+date = datetime.strptime(electionDate, '%B %d, %Y')
+
+config = {
+  "tabulatorVersion" : "1.2.0",
+  "outputSettings" : {
+    "contestName" : contestName,
+    "outputDirectory" : outputDirectory,
+    "contestDate" : date.isoformat()[:10],
+    "contestJurisdiction" : "Association of Amherst Students",
+    "contestOffice" : "",
+    "tabulateByPrecinct" : False,
+    "generateCdfJson" : False
+  },
+  "cvrFileSources" : [ {
+    "filePath" : outputDirectory + os.path.pathsep + filename + '.xlsx',
+    "contestId" : "",
+    "firstVoteColumnIndex" : "4",
+    "firstVoteRowIndex" : "2",
+    "idColumnIndex" : "1",
+    "precinctColumnIndex" : "2",
+    "overvoteDelimiter" : "",
+    "provider" : "ess",
+    "overvoteLabel" : "overvote",
+    "undervoteLabel" : "undervote",
+    "undeclaredWriteInLabel" : "",
+    "treatBlankAsUndeclaredWriteIn" : False
+  } ],
+  "candidates" : [ ],  # { "name" : "Lettuce", "code" : "", "excluded" : False }
+  "rules" : {
+    "tiebreakMode" : "previousRoundCountsThenRandom",
+    "overvoteRule" : "exhaustImmediately",
+    "winnerElectionMode" : "singleWinnerMajority",
+    "randomSeed" : round(random.SystemRandom().random()*10000),
+    "numberOfWinners" : "1",
+    "multiSeatBottomsUpPercentageThreshold" : "",
+    "decimalPlacesForVoteArithmetic" : "4",
+    "minimumVoteThreshold" : "",
+    "maxSkippedRanksAllowed" : "1",
+    "maxRankingsAllowed" : "max",
+    "nonIntegerWinningThreshold" : False,
+    "hareQuota" : False,
+    "batchElimination" : True,
+    "continueUntilTwoCandidatesRemain" : False,
+    "exhaustOnDuplicateCandidate" : False,
+    "rulesDescription" : "Single-Seat RCV",
+    "treatBlankAsUndeclaredWriteIn" : False
+  }
+}
 
 #voters = () # Information about all voters, if one wishes to include in output.
 elections = ()  # row indices of election information
-candidates = () # list of available candidates for each election
+eLabels = ()    # labels assigned to each election, e.g. 'Q1'
+candidates = () # lists of declared candidates for each election
+allCandidates = []  # unique sets of all candidates for each election
 rankings = ()   # Rankings by all voters
 with open(infile, 'r') as input:
     for row in csv.reader(input):
         if len(elections) == 0:   # First row, election labels
-            if len(row) <= 10 or len(row[10]) < 2 or row[10][:2] != 'Q1':
+            if len(row) <= 10:
                 sys.exit('Error: Qualtrics file does not have election information.')
             #voters = (row[:10],)
             election = 10
             elections = (election,) # index into row for election start
-            qCurrent = 'Q1'
-            for question in row[11:]: # ['Q1_2', ..., 'Q2_1', ...]
+            eCurrent = row[10].split('_')[0]    # current label, e.g. 'Q1_1' => ['Q1','1']
+            eLabels = (eCurrent,)
+            for candidate in row[11:]: # e.g. ['Q1_2', ..., 'Q2_1', ...]
                 election += 1
-                q = question.split('_')[0]
-                if q == qCurrent: continue
-                qCurrent = q
+                e = candidate.split('_')[0]
+                if e == eCurrent: continue    # otherwise define a new election
                 elections += (election,)
+                eCurrent = e
+                eLabels += (eCurrent,)
             elections += (election+1,)    # non-existent election but an end marker
         elif len(candidates) == 0: # Second row, election candidates
             #voters = (row[:10],)
-            for i in range(len(elections)-1):
-                questions = ()
-                for question in row[elections[i]:elections[i + 1]]:
-                    questions += (question.split(' - ')[-1],)
-                candidates += (questions,)
+            for election in range(len(elections)-1):
+                names = ()
+                for name in row[elections[election]:elections[election+1]]:
+                    names += (name.split(' - ')[-1],)
+                candidates += (names,)
+                allCandidates += [set(names)-set(('Write-In', 'Text'))]    # a unique set
         elif row[0][0] == '{': continue # Third row {"Importid": …}, skip
         else:
             #voters += (row[:10],)
             rankingsByChoice = ()
-            for i in range(len(elections)-1):
-                rankingByCandidate = row[elections[i]:elections[i + 1]]
+            for election in range(len(elections)-1):
+                rankingByCandidate = row[elections[election]:elections[election + 1]]
                 rankingByChoice = ()
                 for rank in range(1,len(rankingByCandidate)):  # avoids last write-in value
                     try:
-                        candidate = candidates[i][rankingByCandidate.index(str(rank))]
+                        candidate = candidates[election][rankingByCandidate.index(str(rank))]
                     except ValueError:
                         rankingByChoice += ('undervote',)
                     else:
                         if candidate == 'Write-In':
                             writein = rankingByCandidate[-1].strip()
-                            if (writein == ''): # This can mostly be avoided with a Qualtrics setting
+                            if (writein == ''): # This can generally be avoided with a Qualtrics setting
                                 rankingByChoice += ('undervote',)
                             else:
                                 rankingByChoice += (writein,)
+                                allCandidates[election] |= set((writein,))
                         else:
                             rankingByChoice += (candidate,)
                 rankingsByChoice += (rankingByChoice,)  # aggregates multiple elections
-            rankings += (rankingsByChoice,)
-
+            rankings += (rankingsByChoice,) # aggregates multiple voter records
 input.close()
 
-for election in range(1, len(elections)):
-    with open(filename + '_Q' + str(election) + '.csv', 'w') as output:
+# Output individual election files and corresponding configuration files
+for election in range(len(elections)-1):
+    eLabel = eLabels[election]
+    config['outputSettings']['contestOffice'] = eLabel
+    config['cvrFileSources'][0]['contestId'] = eLabel
+    config['candidates'] = []
+    for candidate in allCandidates[election]:
+        config['candidates'] += [{ "name" : candidate, "code" : "", "excluded" : False }]
+    with open(filename + '_' + eLabel + '.csv', 'w') as output:
         csvwriter = csv.writer(output)
         csvwriter.writerow(["Cast Vote Record","Precinct","Ballot Style"] +
-           ['Q' + str(election) + ' Choice ' + str(choice) for choice in range(1,elections[election] - elections[election-1])])
+           [eLabel + ' Choice ' + str(choice) 
+                for choice in range(1, elections[election+1] - elections[election])])
         for record in range(len(rankings)):
             csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
-                               rankings[record][election-1])            
+                               rankings[record][election])            
         output.close()
+    with open(filename + '_' + eLabel + '_cdf.json', 'w') as output:
+        output.write(json.dumps(config, indent=4, separators=(',', ': ')))
