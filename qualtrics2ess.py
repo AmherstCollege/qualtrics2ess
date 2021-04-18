@@ -176,3 +176,5 @@ for election in range(len(elections)-1):
         output.close()
     with open(filename + '_' + eLabel + '_cdf.json', 'w') as output:
         output.write(json.dumps(config, indent=4, separators=(',', ': ')))
+
+print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
