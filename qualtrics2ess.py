@@ -164,7 +164,7 @@ with open(infile, 'r') as input:
                             rankingByChoice += (candidate,)
                 rankingsByChoice += (rankingByChoice,)  # aggregates multiple elections
             rankings += (rankingsByChoice,) # aggregates multiple voter records
-input.close()
+    input.close()
 
 # Output individual election files and corresponding configuration files
 for election in range(len(elections)-1):
