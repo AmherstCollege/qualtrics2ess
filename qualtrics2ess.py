@@ -28,8 +28,8 @@ Created on Mon Apr  5 01:40:21 2021
 import sys
 import os
 import csv
-import json
-import random
+from json import dumps as jsonPrint
+from random import SystemRandom as sr
 from datetime import datetime
 
 if sys.version_info.major + sys.version_info.minor/10. < 2.5:
@@ -38,6 +38,15 @@ elif sys.version_info.major == 2:
     from urllib import unquote_plus
 else:
     from urllib.parse import unquote_plus
+
+# The openpyxl library must be installed with conda or pip
+try:
+    import openpyxl
+except:
+    excel = False
+else:
+    excel = True
+
 
 if len(sys.argv) == 1:
     infile = 'What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv'
@@ -48,8 +57,8 @@ else:
 outputDirectory = os.path.dirname(infile)
 if outputDirectory == '':
     outputDirectory = os.getcwd()
-filename = os.path.splitext(os.path.basename(infile))[0]    # Root filename
-(contestName, electionDate, time) = unquote_plus(filename).split('_')
+filename = unquote_plus(os.path.splitext(os.path.basename(infile))[0])    # Root filename
+(contestName, electionDate, time) = filename.split('_')
 date = datetime.strptime(electionDate, '%B %d, %Y')
 
 config = {
@@ -77,13 +86,13 @@ config = {
     "undeclaredWriteInLabel" : "",
     "treatBlankAsUndeclaredWriteIn" : False
   } ],
-  "candidates" : [ ],  # { "name" : "Lettuce", "code" : "", "excluded" : False }
+  "candidates" : [ ],  # e.g. { "name" : "Lettuce", "code" : "", "excluded" : False }
   "rules" : {
     "tiebreakMode" : "previousRoundCountsThenRandom",
     "overvoteRule" : "exhaustImmediately",
-    "winnerElectionMode" : "singleWinnerMajority",
-    "randomSeed" : str(round(random.SystemRandom().random()*10000)),
-    "numberOfWinners" : "1",
+    "winnerElectionMode" : "",
+    "randomSeed" : str(round(sr().random()*10000)),
+    "numberOfWinners" : "",
     "multiSeatBottomsUpPercentageThreshold" : "",
     "decimalPlacesForVoteArithmetic" : "4",
     "minimumVoteThreshold" : "",
@@ -91,10 +100,10 @@ config = {
     "maxRankingsAllowed" : "max",
     "nonIntegerWinningThreshold" : False,
     "hareQuota" : False,
-    "batchElimination" : True,
+    "batchElimination" : False,
     "continueUntilTwoCandidatesRemain" : False,
     "exhaustOnDuplicateCandidate" : False,
-    "rulesDescription" : "Single-Seat RCV",
+    "rulesDescription" : "",
     "treatBlankAsUndeclaredWriteIn" : False
   }
 }
@@ -165,16 +174,29 @@ for election in range(len(elections)-1):
     for candidate in allCandidates[election]:
         config['candidates'] += [{ "name" : candidate, "code" : "", "excluded" : False }]
     config['cvrFileSources'][0]['filePath'] = filename + '_' + eLabel + '.xlsx'
-    with open(filename + '_' + eLabel + '.csv', 'w') as output:
-        csvwriter = csv.writer(output)
-        csvwriter.writerow(["Cast Vote Record","Precinct","Ballot Style"] +
-           [eLabel + ' Choice ' + str(choice) 
-                for choice in range(1, elections[election+1] - elections[election])])
-        for record in range(len(rankings)):
-            csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
-                               rankings[record][election])            
-        output.close()
     with open(filename + '_' + eLabel + '_cdf.json', 'w') as output:
-        output.write(json.dumps(config, indent=4, separators=(',', ': ')))
+        output.write(jsonPrint(config, indent=4, separators=(',', ': ')))
+        output.close()
 
-print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
+    header = ["Cast Vote Record","Precinct","Ballot Style"] + \
+               [eLabel + ' Choice ' + str(choice) 
+                for choice in range(1, elections[election+1] - elections[election])]
+    if excel:
+        wb = openpyxl.Workbook()
+        ws1 = wb.active
+        ws1.title = "Marked Sheet"
+        ws1.append(header)
+        for record in range(len(rankings)):
+            ws1.append((str(record+1), filename, "Qualtrics") + 
+                       rankings[record][election])            
+        wb.save(filename = config['cvrFileSources'][0]['filePath'])
+        wb.close()
+    else:   # CSV
+        with open(filename + '_' + eLabel + '.csv', 'w') as output:
+            csvwriter = csv.writer(output)
+            csvwriter.writerow(header)
+            for record in range(len(rankings)):
+                csvwriter.writerow((str(record+1), unquote_plus(filename), "Qualtrics") + 
+                                   rankings[record][election])            
+            output.close()
+        print("Warning: Output CSV files must now be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
