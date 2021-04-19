@@ -7,7 +7,7 @@ Usage: ./qualtrics2ess.py qualtricsfile.csv
 
 ## Description
 
-At this time the RCV Universal Tabulator cannot read the Qualtrics format — instead the most similar format is the ES&S format, after the company whose equipment generates it. The former is in Candidate by Choice format, while the latter is Choice by Candidate. But it’s a relatively simple transformation to convert one to the other.
+At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-universal-tabulator) cannot read the Qualtrics format — instead the most similar format is the ES&S format, after the company whose equipment generates it. The former is in Candidate by Choice format, while the latter is Choice by Candidate. But it’s a relatively simple transformation to convert one to the other.
 
 This script will run on any computer that has the Python interpreter installed on it.
 
@@ -48,6 +48,8 @@ Qualtrics will by itself prevent overvotes.
 [Download and install pip if it's not already installed](https://pypi.org/project/pip/)<br><br>
 Then in the terminal run the command-line statement:<br><br>
 pip install openpyxl
+
+4. Install the [RCV Universal Tabulator](https://github.com/BrightSpots/rcv).
 
 ## Background
 
