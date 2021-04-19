@@ -25,16 +25,18 @@ The qualtrics2ess.py script will also generate a common data format (CDF) file f
 
 ## Details
 
-• Write-in values are filled in, in the correct choice column.
+* Write-in values are filled in, in the correct choice column.
 
-• Blank or -99 values are replaced by the keyword "undervote". 
+* Blank or -99 values are replaced by the keyword "undervote". 
 Qualtrics will by itself prevent overvotes.
 
-• Separate elections are output into different Excel files (CSV if necessary).
+* Separate elections are output into different Excel files (CSV if necessary).
 
-• Extra header and voter identification information is dropped.
+* Config files are also generated with information from the Qualtrics file, including candidate names.
 
-• Compatible with Python 2.5 or later, including Python 3.x.
+* Extra header and voter identification information is dropped.
+
+* Compatible with Python 2.5 or later, including Python 3.x.
 
 ## Installation
 
