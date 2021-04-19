@@ -38,18 +38,17 @@ Qualtrics will by itself prevent overvotes.
 
 ## Installation
 
-[Github Source](https://github.com/AmherstCollege/qualtrics2ess)
+1. [Github Source](https://github.com/AmherstCollege/qualtrics2ess)
 
-[Download and install Python](https://www.python.org/downloads/)
+2. [Download and install Python](https://www.python.org/downloads/)
 
-qualtrics2ess.py depends on the library openpyxl, which can be installed with pip:
+3. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed with pip:
 
 [Download and install pip](https://pypi.org/project/pip/)
 
 then in the terminal run the command line statement:
 
 pip install openpyxl
-
 
 ## Background
 
