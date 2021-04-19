@@ -44,11 +44,11 @@ Qualtrics will by itself prevent overvotes.
 
 3. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed with pip:
 
-[Download and install pip](https://pypi.org/project/pip/)
+: [Download and install pip](https://pypi.org/project/pip/)
 
-then in the terminal run the command line statement:
+: then in the terminal run the command line statement:
 
-pip install openpyxl
+: pip install openpyxl
 
 ## Background
 
