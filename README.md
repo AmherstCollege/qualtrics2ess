@@ -34,7 +34,7 @@ Qualtrics will by itself prevent overvotes.
 
 • Extra header and voter identification information is dropped.
 
-• Compatible with both Python 2.5 or later, including Python 3.x.
+• Compatible with Python 2.5 or later, including Python 3.x.
 
 ## Installation
 
