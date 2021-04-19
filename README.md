@@ -36,7 +36,7 @@ Qualtrics will by itself prevent overvotes.
 
 * Config files are also generated with information from the Qualtrics file, including candidate names.
 
-* Output files are URL-decoded to make them more readable by humans (this may make them less compatible on older operating systems). *
+* Output files are URL-decoded to make them more readable by humans (this may make them less compatible on older operating systems).
 
 * Extra header and voter identification information is dropped.
 
@@ -46,7 +46,8 @@ Qualtrics will by itself prevent overvotes.
 
 1. [Github Source](https://github.com/AmherstCollege/qualtrics2ess)
 
-2. [Download and install Python](https://www.python.org/downloads/)
+2. [Download and install Python](https://www.python.org/downloads/)<br>
+Alternative to both steps 2&3: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a useful collection of Python libraries.
 
 3. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed with pip:<br><br>
 [Download and install pip if it's not already installed](https://pypi.org/project/pip/)<br><br>
