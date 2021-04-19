@@ -3,7 +3,7 @@
 Convert ranked choice output from Qualtrics CSV to ES&S format, 
 which can be fed into the RCV Universal Tabulator.
 
-Usage: ./qualtrics2ess.py qualtricsfile.csv
+Usage: qualtrics2ess.py qualtricsfile.csv
 
 ## Description
 
@@ -46,15 +46,14 @@ Qualtrics will by itself prevent overvotes.
 
 1. [Github Source](https://github.com/AmherstCollege/qualtrics2ess)
 
-2. [Download and install Python](https://www.python.org/downloads/)<br>
-Alternative to both steps 2&3: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a useful collection of Python libraries.
+2. a. [Download and install Python](https://www.python.org/downloads/)<br><br>
+b. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed by running the program **pip** in the terminal (command shell):<br><br>
+pip install openpyxl<br><br>
+If pip isn't available: [Download and install pip](https://pypi.org/project/pip/)<br>
+Otherwise, CSV files will be generated, and Excel can be used to convert them.<br><br>
+Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a single python installation along with a useful collection of Python libraries.
 
-3. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed with pip:<br><br>
-[Download and install pip if it's not already installed](https://pypi.org/project/pip/)<br><br>
-Then in the terminal run the command-line statement:<br><br>
-pip install openpyxl
-
-4. Install the [RCV Universal Tabulator](https://github.com/BrightSpots/rcv).
+3. Install the [RCV Universal Tabulator](https://github.com/BrightSpots/rcv).
 
 ## Background
 
