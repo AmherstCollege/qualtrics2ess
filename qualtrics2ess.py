@@ -186,7 +186,7 @@ for election in range(len(elections)-1):
         ws1.title = "Marked Sheet"
         ws1.append(header)
         for record in range(len(rankings)):
-            ws1.append((str(record+1), filename, "Qualtrics") + 
+            ws1.append((record+1, filename, "Qualtrics") + 
                        rankings[record][election])            
         wb.save(filename = config['cvrFileSources'][0]['filePath'])
         wb.close()
