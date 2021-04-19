@@ -13,7 +13,7 @@ This script will run on any computer that has the Python interpreter installed o
 
 The Qualtrics survey / ballot document is converted to a set of ES&S-format documents, one for each election on the ballot:
 
-![Cast Vote Record table in Choice by Candidate format](CVR Vegetable RCV.png)
+![Cast Vote Record table in Choice by Candidate format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20RCV.png)
 
 ### Excel Workbook and CSV Formats
 
