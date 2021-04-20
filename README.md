@@ -3,7 +3,7 @@
 Convert ranked choice output from Qualtrics CSV to ES&S format, 
 which can be fed into the RCV Universal Tabulator.
 
-Usage: qualtrics2ess.py qualtricsfile.csv
+Usage, from a terminal or command shell: qualtrics2ess.py qualtricsfile.csv
 
 ## Description
 
