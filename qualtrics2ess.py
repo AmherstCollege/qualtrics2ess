@@ -28,6 +28,7 @@ Created on Mon Apr  5 01:40:21 2021
 import sys
 import os
 import csv
+import re
 from json import dumps as jsonPrint
 from random import SystemRandom as sr
 from datetime import datetime
@@ -47,7 +48,6 @@ except:
 else:
     excel = True
 
-
 if len(sys.argv) != 2 :
     sys.exit('Usage: ' + sys.argv[0] + ' qualtricsfile')
 else:
@@ -56,6 +56,9 @@ outputDirectory = os.path.dirname(infile)
 if outputDirectory == '':
     outputDirectory = os.getcwd()
 filename = unquote_plus(os.path.splitext(os.path.basename(infile))[0])    # Root filename
+if re.search("win", sys.platform):
+    filename = re.sub(r'[\\/\:*"<>\|\.%\$\?\^&£]', '', filename)
+
 (contestName, electionDate, time) = filename.split('_')
 date = datetime.strptime(electionDate, '%B %d, %Y')
 
