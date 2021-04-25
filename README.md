@@ -15,7 +15,7 @@ At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-univ
 
 This script will run on any computer that has the Python interpreter installed on it.
 
-A Qualtrics survey / ballot document named What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv:
+A Qualtrics survey / ballot document provided here, [What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv](https://github.com/AmherstCollege/qualtrics2ess/blob/main/What%2BAre%2BYour%2BFavorite%2BFruits%2Band%2BVegetables%253F_April%2B13%252C%2B2021_23.28.csv):
 
 ![Cast Vote Record table in Candidate by Choice format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20Qualtrics.png)
 
