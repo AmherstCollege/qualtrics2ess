@@ -1,13 +1,15 @@
 # qualtrics2ess
 
-Convert ranked choice output from Qualtrics CSV to ES&S format, 
+Convert ranked choice output from Qualtrics CSV to ES&S Excel format, 
 which can be fed into the RCV Universal Tabulator.
 
-Usage, from a terminal or command shell: qualtrics2ess.py qualtricsfile.csv
+Usage, from a terminal or command shell: qualtrics2ess.py *qualtricsfile.csv*
 
 ## Description
 
-At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-universal-tabulator) cannot read the Qualtrics format — instead the most similar format is the ES&S format, after the company whose equipment generates it. The former is in Candidate by Choice format, while the latter is Choice by Candidate. But it’s a relatively simple transformation to convert one to the other.
+[Qualtrics](https://www.qualtrics.com/core-xm/survey-software/) is a cloud platform providing survey tools, including the ability to rank items, send participation links to individuals, and record their choices anonymously. It can therefore be used for ranked choice voting elections. Amherst College has written [a set of instructions for using Qualtrics for RCV elections](https://docs.google.com/document/d/1MT7JORmGbe4ALw4sfMT8w2_Wgs_8MJcbUVcXUcMc5BA/edit?usp=sharing).
+
+At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-universal-tabulator) cannot read the Qualtrics format — instead the most similar format is the ES&S format, after the company whose equipment generates it. The former is in Candidate by Choice format, while the latter is Choice by Candidate. But it’s a relatively simple transformation to convert one to the other, provided by this script.
 
 ### *Qualtrics to ES&S Format* ###
 
