@@ -15,7 +15,11 @@ At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-univ
 
 This script will run on any computer that has the Python interpreter installed on it.
 
-The Qualtrics survey / ballot document is converted to a set of ES&S-format documents, one for each election on the ballot:
+A Qualtrics survey / ballot document:
+
+![Cast Vote Record table in Candidate by Choice format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20Qualtrics.png)
+
+is converted to a set of ES&S-format documents, one for each election on the ballot:
 
 ![Cast Vote Record table in Choice by Candidate format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20RCV.png)
 
