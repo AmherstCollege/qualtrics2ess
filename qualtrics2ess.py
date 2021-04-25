@@ -58,6 +58,11 @@ if outputDirectory == '':
 filename = unquote_plus(os.path.splitext(os.path.basename(infile))[0])    # Root filename
 if re.search("win", sys.platform):
     filename = re.sub(r'[\\/\:*"<>\|\.%\$\?\^&£]', '', filename)
+elif re.search("darwin", sys.platform):
+    filename = re.sub(r'[/\:]', '', filename)
+else:
+    filename = re.sub(r'/', '', filename)
+
 
 (contestName, electionDate, time) = filename.split('_')
 date = datetime.strptime(electionDate, '%B %d, %Y')
