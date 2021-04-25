@@ -7,7 +7,7 @@ Usage, from a terminal or command shell: qualtrics2ess.py *qualtricsfile.csv*
 
 ## Description
 
-[Qualtrics](https://www.qualtrics.com/core-xm/survey-software/) is a cloud platform providing survey tools, including the ability to rank items, send participation links to individuals, and record their choices anonymously. It can therefore be used for ranked choice voting elections. Amherst College has written [a set of instructions for using Qualtrics for RCV elections](https://docs.google.com/document/d/1MT7JORmGbe4ALw4sfMT8w2_Wgs_8MJcbUVcXUcMc5BA/edit?usp=sharing).
+[Qualtrics](https://www.qualtrics.com/core-xm/survey-software/) is a popular cloud platform providing survey tools, including the ability to rank items, e-mail participation links to individuals, and record their choices anonymously. It can therefore be used for ranked choice voting elections. Amherst College has written [a set of instructions for using Qualtrics for RCV elections](https://docs.google.com/document/d/1MT7JORmGbe4ALw4sfMT8w2_Wgs_8MJcbUVcXUcMc5BA/edit?usp=sharing).
 
 At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-universal-tabulator) cannot read the Qualtrics format — instead the most similar format is the ES&S format, after the company whose equipment generates it. The former is in Candidate by Choice format, while the latter is Choice by Candidate. But it’s a relatively simple transformation to convert one to the other, provided by this script.
 
@@ -15,11 +15,11 @@ At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-univ
 
 This script will run on any computer that has the Python interpreter installed on it.
 
-A Qualtrics survey / ballot document:
+A Qualtrics survey / ballot document named What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv:
 
 ![Cast Vote Record table in Candidate by Choice format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20Qualtrics.png)
 
-is converted to a set of ES&S-format documents, one for each election on the ballot:
+will be converted to a set of ES&S-format documents, one for each election on the ballot:
 
 ![Cast Vote Record table in Choice by Candidate format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20RCV.png)
 
@@ -55,7 +55,7 @@ Qualtrics will by itself prevent overvotes.
 2. a. [Download and install Python](https://www.python.org/downloads/)<br><br>
 b. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, which can be installed by running the program **pip** in the terminal (command shell):<br><br>
 pip install openpyxl<br><br>
-If pip isn't available: [Download and install pip](https://pypi.org/project/pip/)<br>
+If pip isn't available: [Download and install pip](https://pypi.org/project/pip/)<br><br>
 Otherwise, CSV files will be generated, and Excel can be used to convert them.<br><br>
 Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a single python installation along with a useful collection of Python libraries.
 
