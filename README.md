@@ -61,4 +61,4 @@ Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anac
 
 Created on Mon Apr  5 01:40:21 2021
 
-@author: Andy Anderson, Amherst College, aanderson@amherst.edu
+@author: [Andy Anderson](https://www.amherst.edu/people/facstaff/aanderson), [Amherst College](https://www.amherst.edu), aanderson@amherst.edu
