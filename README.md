@@ -25,7 +25,7 @@ The script will convert such files to a set of ES&S-format Cast Vote Record (CVR
 
 ### *Excel Workbook and CSV Formats*
 
-ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files, ending in _cvr.xlsx. This does require a non-standard Python library, but if it isn’t present it will output files in CSV format instead, ending in _cvr.csv. Any CSV file can be opened in Excel (usually the result if it’s installed and you double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
+ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files, ending in _cvr.xlsx. This does require a non-standard Python library, but if it isn’t present it will output files in CSV format instead, ending in _cvr.csv. Any CSV file can be opened in Excel (usually the result if it’s installed and you double-click the file) and then saved as **File Format:** **Excel Workbook (.xlsx)**.
 
 ### *Common Data Format File*
 
