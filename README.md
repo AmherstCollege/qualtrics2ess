@@ -15,17 +15,17 @@ At this time the [RCV Universal Tabulator](https://www.rcvresources.org/rcv-univ
 
 This script will run on any computer that has the Python interpreter installed on it.
 
-A Qualtrics survey / ballot document provided here, [What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv](https://github.com/AmherstCollege/qualtrics2ess/blob/main/What%2BAre%2BYour%2BFavorite%2BFruits%2Band%2BVegetables%253F_April%2B13%252C%2B2021_23.28.csv):
+A Qualtrics survey / ballot document is provided here for testing: [What+Are+Your+Favorite+Fruits+and+Vegetables%3F_April+13%2C+2021_23.28.csv](https://github.com/AmherstCollege/qualtrics2ess/blob/main/What%2BAre%2BYour%2BFavorite%2BFruits%2Band%2BVegetables%253F_April%2B13%252C%2B2021_23.28.csv):
 
 ![Cast Vote Record table in Candidate by Choice format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20Qualtrics.png)
 
-will be converted to a set of ES&S-format documents, one for each election on the ballot:
+The script will convert such files to a set of ES&S-format cast vote record (CVR) documents, one for each election on the ballot:
 
 ![Cast Vote Record table in Choice by Candidate format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20RCV.png)
 
 ### *Excel Workbook and CSV Formats*
 
-ES&S files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files but this requires a non-standard Python library, ending in _cvr.xlsx. If that isn’t present it will output CSV format instead, ending in _cvr.csv. But any CSV file can be opened in Excel (usually the result if you have it installed and double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
+ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files using a non-standard Python library, ending in _cvr.xlsx. If that library isn’t present it will output files in CSV format instead, ending in _cvr.csv. But any CSV file can be opened in Excel (usually the result if you have it installed and double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
 
 ### *Common Data Format File*
 
@@ -37,6 +37,8 @@ The qualtrics2ess.py script will also generate a common data format (CDF) file f
 
 * Blank or -99 values are replaced by the keyword "undervote". 
 Qualtrics will by itself prevent overvotes.
+
+* The base name of these files will be the same as the Qualtrics file. To make the file names easier to read the ‘+’ and “%XX” characters are either replaced with allowed filename characters or removed.
 
 * Separate elections are output into different Excel files (CSV if necessary).
 
