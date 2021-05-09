@@ -29,7 +29,7 @@ ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV
 
 ### *Common Data Format File*
 
-The qualtrics2ess.py script will also generate a common data format (CDF) file for each election, which provides the basic information about the ballot that can be extracted from the Qualtrics input file. This file can be loaded into the RCV Universal Tabulator as a starting point. Importantly, this includes all of the candidate names on all of the ballots, including write-ins. It does not, however, include the election rules.
+The qualtrics2ess.py script will also generate a common data format (CDF) file for each election, which provides the basic information about the ballot that can be extracted from the Qualtrics input file. This file can be loaded into the RCV Universal Tabulator as a starting point. Importantly, this includes all of the candidate names on all of the ballots, including write-ins. It does not, however, include the election rules, which must be specified in the Tabulator.
 
 ## Details
 
@@ -38,13 +38,11 @@ The qualtrics2ess.py script will also generate a common data format (CDF) file f
 * Blank or -99 values are replaced by the keyword "undervote". 
 Qualtrics will by itself prevent overvotes.
 
-* The base name of these files will be the same as the Qualtrics file. To make the file names easier to read the ‘+’ and “%XX” characters are either replaced with allowed filename characters or removed.
-
 * Separate elections are output into different Excel files (CSV if necessary).
 
 * Config files are also generated with information from the Qualtrics file, including candidate names.
 
-* Output files are URL-decoded to make them more readable by humans (this may make them less compatible on older operating systems).
+* The base name of these files will be the same as the Qualtrics file. To make the file names easier to read the ‘+’ and “%XX” characters are either replaced with allowed filename characters or removed.
 
 * Extra header and voter identification information is dropped.
 
