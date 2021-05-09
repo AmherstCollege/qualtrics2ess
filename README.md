@@ -19,17 +19,17 @@ A Qualtrics survey / ballot document is provided here for testing: [What+Are+You
 
 ![Cast Vote Record table in Candidate by Choice format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20Qualtrics.png)
 
-The script will convert such files to a set of ES&S-format cast vote record (CVR) documents, one for each election on the ballot:
+The script will convert such files to a set of ES&S-format Cast Vote Record (CVR) documents, one for each election on the ballot:
 
 ![Cast Vote Record table in Choice by Candidate format](https://raw.githubusercontent.com/AmherstCollege/qualtrics2ess/main/CVR%20Vegetable%20RCV.png)
 
 ### *Excel Workbook and CSV Formats*
 
-ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files using a non-standard Python library, ending in _cvr.xlsx. If that library isn’t present it will output files in CSV format instead, ending in _cvr.csv. But any CSV file can be opened in Excel (usually the result if you have it installed and double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
+ES&S CVR files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files, ending in _cvr.xlsx. This does require a non-standard Python library, but if it isn’t present it will output files in CSV format instead, ending in _cvr.csv. Any CSV file can be opened in Excel (usually the result if it’s installed and you double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
 
 ### *Common Data Format File*
 
-The qualtrics2ess.py script will also generate a common data format (CDF) file for each election, which provides the basic information about the ballot that can be extracted from the Qualtrics input file. This file can be loaded into the RCV Universal Tabulator as a starting point. Importantly, this includes all of the candidate names on all of the ballots, including write-ins. It does not, however, include the election rules, which must be specified in the Tabulator.
+The qualtrics2ess.py script will also generate a common data format (CDF) file for each election, which provides the basic information about the ballot contained in the Qualtrics input file. They will be in JSON format, a standard format for distributing datasets, and will have a file name ending in _cdf.json. This file can be loaded into the RCV Universal Tabulator as a starting point. Importantly, this includes all of the candidate names on all of the ballots, including write-ins. It does not, however, include the election rules, which must be specified in the Tabulator.
 
 ## Details
 
