@@ -25,7 +25,7 @@ will be converted to a set of ES&S-format documents, one for each election on th
 
 ### *Excel Workbook and CSV Formats*
 
-ES&S files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files but this requires a non-standard Python library, ending in _cvr.xlsx. But if that isn’t present it will output CSV format instead, ending in _cvr.csv. But any CSV file can be opened in Excel (usually the result if you have it installed and double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
+ES&S files are actually provided as Excel workbook (.xlsx) files, so the RCV Universal Tabulator is only designed to input that format. The qualtrics2ess.py script will generate Excel files but this requires a non-standard Python library, ending in _cvr.xlsx. If that isn’t present it will output CSV format instead, ending in _cvr.csv. But any CSV file can be opened in Excel (usually the result if you have it installed and double-click the file) and then saved by menuing **File** > **Save As…** and select the **File Format:** **Excel Workbook (.xlsx)**.
 
 ### *Common Data Format File*
 
