@@ -116,7 +116,7 @@ config = {
 
 #voters = () # Information about all voters, if one wishes to include in output.
 elections = ()  # row indices of election information
-eLabels = ()    # labels assigned to each election, e.g. 'Q1'
+electionLabels = ()    # labels assigned to each election, e.g. 'Q1'
 candidates = () # lists of declared candidates for each election
 allCandidates = []  # unique sets of all candidates for each election
 rankings = ()   # Rankings by all voters
@@ -129,14 +129,14 @@ with open(infile, 'r') as input:
             election = 10
             elections = (election,) # index into row for election start
             eCurrent = row[10].split('_')[0]    # current label, e.g. 'Q1_1' => ['Q1','1']
-            eLabels = (eCurrent,)
+            electionLabels = (eCurrent,)
             for candidate in row[11:]: # e.g. ['Q1_2', ..., 'Q2_1', ...]
                 election += 1
                 e = candidate.split('_')[0]
                 if e == eCurrent: continue    # otherwise define a new election
                 elections += (election,)
                 eCurrent = e
-                eLabels += (eCurrent,)
+                electionLabels += (eCurrent,)
             elections += (election+1,)    # non-existent election but an end marker
         elif len(candidates) == 0: # Second row, election candidates
             #voters = (row[:10],)
@@ -174,21 +174,23 @@ with open(infile, 'r') as input:
 
 # Output individual election files and corresponding configuration files
 for election in range(len(elections)-1):
-    eLabel = eLabels[election]
-    config['outputSettings']['contestOffice'] = eLabel
+    electionLabel = electionLabels[election]
+    config['outputSettings']['contestOffice'] = electionLabel
     config['candidates'] = []
     for candidate in allCandidates[election]:
         config['candidates'] += [{ "name" : candidate, "code" : "", "excluded" : False }]
-    filenameElection = filename + '_' + eLabel
-    config['cvrFileSources'][0]['filePath'] = filenameElection + '.xlsx'
+    filenameElection = filename + '_' + electionLabel
+    config['cvrFileSources'][0]['filePath'] = filenameElection + '_cvr.xlsx'
     with open(filenameElection + '_cdf.json', 'w') as output:
         output.write(jsonPrint(config, indent=4, separators=(',', ': ')))
         print("Saved: " + filenameElection + '_cdf.json')
+        output.close()
 
     header = ["Cast Vote Record","Precinct","Ballot Style"] + \
-               [eLabel + ' Choice ' + str(choice) 
+               [electionLabel + ' Choice ' + str(choice) 
                 for choice in range(1, elections[election+1] - elections[election])]
     if excel:
+        filenameCVR = config['cvrFileSources'][0]['filePath']
         wb = openpyxl.Workbook()
         ws1 = wb.active
         ws1.title = "Marked Sheet"
@@ -196,17 +198,18 @@ for election in range(len(elections)-1):
         for record in range(len(rankings)):
             ws1.append((record+1, filename, "Qualtrics") + 
                        rankings[record][election])            
-        wb.save(filename = config['cvrFileSources'][0]['filePath'])
+        wb.save(filename = filenameCVR)
         wb.close()
-        print("Saved: " + config['cvrFileSources'][0]['filePath'])
     else:   # CSV
-        with open(filenameElection + '.csv', 'w') as output:
+        filenameCVR = filenameElection + '_cvr.csv'
+        with open(filenameCVR, 'w') as output:
             csvwriter = csv.writer(output)
             csvwriter.writerow(header)
             for record in range(len(rankings)):
                 csvwriter.writerow((str(record+1), filename, "Qualtrics") + 
                                    rankings[record][election])            
-            print("Saved: " + filenameElection + '.csv')
+            output.close()
+    print("Saved: " + filenameCVR)
 
 if not excel:
     print("Warning: Output CSV files must be opened by Excel and resaved as Excel Workbook (.xlsx) files.")
