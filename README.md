@@ -57,13 +57,13 @@ b. To create Excel workbooks, qualtrics2ess.py depends on the library openpyxl, 
 pip install openpyxl<br><br>
 If pip isn't available: [Download and install pip](https://pypi.org/project/pip/)<br><br>
 Otherwise, CSV files will be generated, and Excel can be used to convert them.<br><br>
-Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a single python installation along with a useful collection of Python libraries.
+c. Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anaconda.com/products/individual), providing a single python installation along with a useful collection of Python libraries.
 
 3. Install the [RCV Universal Tabulator](https://github.com/BrightSpots/rcv).
 
 ## Running qualtrics2ess
 
-1. qualtrics2ess.py is a python-language script. You must use python to run it in a command-line environment, the terminal on Macintosh, the CMD or PowerShell on Windows, or a shell on Unix. The command is:
+1. qualtrics2ess.py is a python-language script. You must use python to run it in a command-line environment: the terminal on Macintosh, the CMD or PowerShell on Windows, or a shell on Unix. The command is:
 
 ```
 python qualtrics2ess.py qualtricsfile.cvr
