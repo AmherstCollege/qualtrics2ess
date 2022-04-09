@@ -64,16 +64,11 @@ c. Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.a
 ## Running qualtrics2ess
 
 1. qualtrics2ess.py is a python-language script. You must use python to run it in a command-line environment: the terminal on Macintosh, the CMD or PowerShell on Windows, or a shell on Unix. The command is:<br><br>
-```
-python qualtrics2ess.py qualtricsfile.cvr
-```
-<br><br>
+`python qualtrics2ess.py qualtricsfile.cvr`<br><br>
 where `qualtricsfile.cvr` is your Qualtrics cast-vote-records file.
 
 2. On Mac or Unix, you can also make the program executable<br><br>
-```
-chmod +x qualtrics2ess.py
-```
+`chmod +x qualtrics2ess.py`
 <br><br>
 and then you don't need to precede it with `python`.
 
