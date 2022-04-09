@@ -61,6 +61,26 @@ Alternative to steps 2a and 2b: [Download and install Anaconda](https://www.anac
 
 3. Install the [RCV Universal Tabulator](https://github.com/BrightSpots/rcv).
 
+## Running qualtrics2ess
+
+1. qualtrics2ess.py is a python-language script. You must use python to run it in a command-line environment, the terminal on Macintosh, the CMD or PowerShell on Windows, or a shell on Unix. The command is:
+
+```
+python qualtrics2ess.py qualtricsfile.cvr
+```
+
+where `qualtricsfile.cvr` is your Qualtrics cast-vote-records file.
+
+2. On Mac or Unix, you can also make the program executable
+
+```
+chmod +x qualtrics2ess.py
+```
+
+and then you don't need to precede it with `python`.
+
+3. Be aware that in a command-line environment, quotes, spaces, and other special characters in a file name can be interpreted as something different, so if you have any characters other than letters or numbers in the file name, enclose it between single quotes, or if it contains a single quote enclose it between double quotes.
+
 ## Background
 
 Created on Mon Apr  5 01:40:21 2021
